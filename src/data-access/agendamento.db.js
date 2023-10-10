@@ -4,12 +4,7 @@ export default function makeAgendamentoDb({Agendamento}) {
     async function selectUm(idPaciente) {
         const db = mysql.createPool(process.env.CONN);
         const query = Agendamento.selectAgendamento(idPaciente);
-        const response = await db.query(query);
-        if (response[0][0]) {
-            return new Agendamento(response[0][0].dataAgendamento, response[0][0].horaAgendamento);
-        } else {
-            return undefined;
-        }
+        return await db.query(query);
     }
 
     async function agendar(idPaciente, idUsuario, agendamento) {
@@ -23,7 +18,6 @@ export default function makeAgendamentoDb({Agendamento}) {
             return responseUpdate[0];
         } else {
             const queryInsert = Agendamento.insertAgendamento(idPaciente, idUsuario, agendamento);
-            console.log(queryInsert);
             const responseInsert = await db.query(queryInsert);
             return responseInsert[0];
         }
