@@ -6,13 +6,19 @@ import PlanoMetas from "./plano-metas.model.js";
 import Alimento from "./alimento.model.js";
 import Refeicao from "./refeicao.model.js";
 import PlanoAlimentar from "./plano-alimentar.model.js";
+import Paciente from "./paciente.model.js";
+import PacienteResumo from "./paciente-resumo.model.js";
+import Codigo from "./codigo.model.js";
 
 export {
     Agendamento,
     Agenda,
     Alimento,
     Avaliacao,
+    Codigo,
     Meta,
+    Paciente,
+    PacienteResumo,
     PlanoAlimentar,
     PlanoMetas,
     Refeicao
