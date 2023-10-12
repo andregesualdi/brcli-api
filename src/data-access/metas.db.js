@@ -10,8 +10,7 @@ export default function makeMetasDb({Meta, PlanoMetas}) {
     async function buscarMetas(idPaciente, idPlanoMetas) {
         const db = mysql.createPool(process.env.CONN);
         const query = Meta.selectMeta(idPaciente, idPlanoMetas);
-        const response = await db.query(query);
-        return response;
+        return await db.query(query);
     }
 
     async function cadastrarPlanoMetas(idPaciente, planoMetas) {
