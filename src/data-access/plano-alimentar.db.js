@@ -1,26 +1,27 @@
 import mysql from 'mysql2/promise';
+import Configuration from '../config.js';
 
 export default function makePlanoAlimentarDb({Alimento, PlanoAlimentar, Refeicao}) {
     async function buscarPlanoAlimentar(idPaciente) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = PlanoAlimentar.selectPlanoAlimentar(idPaciente);
         return await db.query(query);
     }
 
     async function buscarRefeicoes(idPaciente, idPlanoAlimentar) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = Refeicao.selectRefeicao(idPaciente, idPlanoAlimentar);
         return await db.query(query);
     }
 
     async function buscarAlimentos(idRefeicao) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = Alimento.selectAlimento(idRefeicao);
         return await db.query(query);
     }
 
     async function cadastrarPlanoAlimentar(idPaciente, planoAlimentar) {
-        const db = mysql.createPool({multipleStatements: true, uri: process.env.CONN});
+        const db = mysql.createPool({multipleStatements: true, uri: Configuration.conn});
         if (planoAlimentar.id) {
             const queryUpdatePlano = PlanoAlimentar.updatePlanoAlimentar(planoAlimentar.data, planoAlimentar.id, idPaciente);
             const responsePlano = await db.query(queryUpdatePlano);

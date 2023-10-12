@@ -1,8 +1,9 @@
 import mysql from 'mysql2/promise';
+import Configuration from '../config.js';
 
 export default function makeAvaliacaoDb({Avaliacao}) {
     async function selectAvaliacao(idPaciente) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = Avaliacao.selectAvaliacao(idPaciente);
         const response = await db.query(query);
         if (response[0][0]) {
@@ -13,7 +14,7 @@ export default function makeAvaliacaoDb({Avaliacao}) {
     }
 
     async function salvarAvaliacao(idPaciente, avaliacao) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = Avaliacao.findAvaliacao(idPaciente);
         const responseFind = await db.query(query);
         if (responseFind[0].length > 0) {
