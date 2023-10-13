@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 import Configuration from '../config.js';
 
-export default function makePacientesDb({Paciente, Codigo}) {
+export default function makePacientesDb({Paciente, PacienteMobile, Codigo}) {
     async function listarPacientes(idUsuario) {
         const db = mysql.createPool(Configuration.conn);
         const query = Paciente.selectListaPacientes(idUsuario);
@@ -11,6 +11,12 @@ export default function makePacientesDb({Paciente, Codigo}) {
     async function detalharPaciente(idPaciente, idUsuario) {
         const db = mysql.createPool(Configuration.conn);
         const query = Paciente.selectDetalhesPaciente(idPaciente, idUsuario);
+        return await db.query(query);
+    }
+
+    async function recuperarDadosPacienteNutricionista(idPaciente) {
+        const db = mysql.createPool(Configuration.conn);
+        const query = PacienteMobile.selectPacienteNutricionista(idPaciente);
         return await db.query(query);
     }
 
@@ -50,6 +56,7 @@ export default function makePacientesDb({Paciente, Codigo}) {
         cadastrarEditarPaciente,
         cadastrarCodigoAcesso,
         cadastrarImagem,
-        checarCodigo
+        checarCodigo,
+        recuperarDadosPacienteNutricionista
     });
 }
