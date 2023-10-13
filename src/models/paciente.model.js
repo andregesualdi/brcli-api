@@ -3,6 +3,9 @@ class Paciente {
         id,
         codigoAcesso,
         dataNascimento,
+        dataCadastro,
+        dataAgendamento,
+        horaAgendamento,
         altura,
         peso,
         nome,
@@ -15,6 +18,9 @@ class Paciente {
         this.codigoAcesso = codigoAcesso;
         this.altura = altura;
         this.dataNascimento = dataNascimento;
+        this.dataCadastro = dataCadastro;
+        this.dataAgendamento = dataAgendamento;
+        this.horaAgendamento = horaAgendamento;
         this.peso = peso;
         this.nome = nome;
         this.nomeAcesso = nomeAcesso;
@@ -28,11 +34,13 @@ class Paciente {
     }
 
     static selectDetalhesPaciente(idPaciente, idUsuario) {
-        return `SELECT codigoAcesso, dataNascimento, altura, peso, nome, nomeAcesso, email, telefone, imagem FROM pacientes WHERE usuarios_id = ${idUsuario} AND idPaciente = ${idPaciente};`;
+        return `SELECT p.codigoAcesso, p.dataNascimento, p.altura, p.peso, p.nome, p.nomeAcesso, p.email, p.telefone, p.imagem, p.dataCadastro, a.horaAgendamento, a.dataAgendamento
+            FROM pacientes p JOIN agendamentos a ON p.usuarios_id = a.usuarios_id AND p.idPaciente = a.pacientes_idPaciente
+            WHERE p.usuarios_id = ${idUsuario} AND p.idPaciente = ${idPaciente};`;
     }
 
-    static insertPaciente(idUsuario, paciente) {
-        return `INSERT INTO pacientes (\`dataNascimento\`, \`altura\`, \`peso\`, \`nome\`, \`nomeAcesso\`, \`email\`, \`telefone\`, \`usuarios_id\`) VALUES ('${paciente.dataNascimento}', ${paciente.altura}, ${paciente.peso}, '${paciente.nome}', '${paciente.nomeAcesso}', '${paciente.email}', ${paciente.telefone}, ${idUsuario});`;
+    static insertPaciente(idUsuario, paciente, dataCadastro) {
+        return `INSERT INTO pacientes (\`dataNascimento\`, \`altura\`, \`peso\`, \`nome\`, \`nomeAcesso\`, \`email\`, \`telefone\`, \`usuarios_id\`, \`dataCadastro\`) VALUES ('${paciente.dataNascimento}', ${paciente.altura}, ${paciente.peso}, '${paciente.nome}', '${paciente.nomeAcesso}', '${paciente.email}', ${paciente.telefone}, ${idUsuario}, '${dataCadastro}');`;
     }
 
     static updatePaciente(idUsuario, paciente) {

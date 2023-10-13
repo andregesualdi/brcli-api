@@ -5,7 +5,7 @@ export default function makeGetDetalhesPaciente(db) {
         const response = await db.detalharPaciente(headers['codigo-paciente'], headers['codigo-usuario']);
         if (response[0][0]) {
             const paciente = response[0][0];
-            return new Paciente(paciente.idPaciente, paciente.codigoAcesso, paciente.dataNascimento, paciente.altura, paciente.peso, paciente.nome, paciente.nomeAcesso, paciente.email, paciente.telefone, paciente.imagem);
+            return new Paciente(paciente.idPaciente, paciente.codigoAcesso, paciente.dataNascimento, paciente.dataCadastro, paciente.dataAgendamento, paciente.horaAgendamento, paciente.altura, paciente.peso, paciente.nome, paciente.nomeAcesso, paciente.email, paciente.telefone, paciente.imagem);
         } else {
             return undefined;
         }

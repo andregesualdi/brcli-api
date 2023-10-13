@@ -1,20 +1,21 @@
 import mysql from 'mysql2/promise';
+import Configuration from '../config.js';
 
 export default function makeMetasDb({Meta, PlanoMetas}) {
     async function buscarPlanoMetas(idPaciente) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = PlanoMetas.selectPlanoMetas(idPaciente);
         return await db.query(query);
     }
 
     async function buscarMetas(idPaciente, idPlanoMetas) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = Meta.selectMeta(idPaciente, idPlanoMetas);
         return await db.query(query);
     }
 
     async function cadastrarPlanoMetas(idPaciente, planoMetas) {
-        const db = mysql.createPool({multipleStatements: true, uri: process.env.CONN});
+        const db = mysql.createPool({multipleStatements: true, uri: Configuration.conn});
         if (planoMetas.id) {
             const queryUpdatePlano = PlanoMetas.updatePlanoMetas(planoMetas.data, planoMetas.id, idPaciente);
             const queryDeleteMetas = Meta.deleteMeta(idPaciente, planoMetas.id);

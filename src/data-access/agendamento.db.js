@@ -1,14 +1,15 @@
 import mysql from 'mysql2/promise';
+import Configuration from '../config.js';
 
 export default function makeAgendamentoDb({Agendamento}) {
     async function selectUm(idPaciente) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = Agendamento.selectAgendamento(idPaciente);
         return await db.query(query);
     }
 
     async function agendar(idPaciente, idUsuario, agendamento) {
-        const db = mysql.createPool(process.env.CONN);
+        const db = mysql.createPool(Configuration.conn);
         const query = Agendamento.findAgendamento(idPaciente);
         const responseFind = await db.query(query);
         if (responseFind[0].length > 0) {
