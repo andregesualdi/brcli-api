@@ -1,10 +1,10 @@
 class PacienteResumo {
     constructor(
-        id,
+        codigoPaciente,
         nome,
         imagem
     ) {
-        this.id = id;
+        this.codigoPaciente = codigoPaciente;
         this.nome = nome;
         this.imagem = imagem;
     }

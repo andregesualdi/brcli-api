@@ -14,13 +14,13 @@ export default function makePacientesDb({Paciente, Codigo}) {
         return await db.query(query);
     }
 
-    async function cadastrarEditarPaciente(idUsuario, paciente) {
+    async function cadastrarEditarPaciente(idUsuario, paciente, data) {
         const db = mysql.createPool(Configuration.conn);
         let query;
         if (paciente.id) {
             query = Paciente.updatePaciente(idUsuario, paciente);
         } else {
-            query = Paciente.insertPaciente(idUsuario, paciente);
+            query = Paciente.insertPaciente(idUsuario, paciente, data);
         }
         const response = await db.query(query);
         return response[0];
@@ -35,7 +35,6 @@ export default function makePacientesDb({Paciente, Codigo}) {
     async function cadastrarCodigoAcesso(idPaciente, idUsuario, codigo) {
         const db = mysql.createPool(Configuration.conn);
         const query = Paciente.updateCodigoAcesso(idPaciente, idUsuario, codigo);
-        console.log(query);
         return await db.query(query);
     }
 
