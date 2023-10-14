@@ -9,6 +9,8 @@ import PlanoAlimentar from "./plano-alimentar.model.js";
 import Paciente from "./paciente.model.js";
 import PacienteResumo from "./paciente-resumo.model.js";
 import Codigo from "./codigo.model.js";
+import NutricionistaMobile from "./nutricionista.mobile.js";
+import PacienteMobile from "./paciente-mobile.model.js";
 
 export {
     Agendamento,
@@ -21,5 +23,7 @@ export {
     PacienteResumo,
     PlanoAlimentar,
     PlanoMetas,
-    Refeicao
+    Refeicao,
+    NutricionistaMobile,
+    PacienteMobile
 };

@@ -3,7 +3,8 @@ import {
     getDetalhesPaciente,
     postPacientes,
     getCodigoAcesso,
-    updateImagemPaciente
+    updateImagemPaciente,
+    getPacienteMobile
 } from "../../usecases/pacientes/index.js";
 
 export default Object.freeze({
@@ -11,5 +12,6 @@ export default Object.freeze({
     getDetalhesPaciente: (httpRequest) => getDetalhesPaciente(httpRequest),
     postPacientes: (httpRequest) => postPacientes(httpRequest),
     getCodigoAcesso: (httpRequest) => getCodigoAcesso(httpRequest),
-    updateImagemPaciente: (httpRequest) => updateImagemPaciente(httpRequest)
+    updateImagemPaciente: (httpRequest) => updateImagemPaciente(httpRequest),
+    getPacienteMobile: (httpRequest) => getPacienteMobile(httpRequest)
 });

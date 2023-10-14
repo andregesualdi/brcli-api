@@ -10,5 +10,6 @@ router.route('/paciente').get(makeCallback(pacientesController.getDetalhesPacien
 router.route('/codigo-acesso').get(makeCallback(pacientesController.getCodigoAcesso));
 router.route('/paciente').post(makeCallback(pacientesController.postPacientes));
 router.route('/paciente').put(makeCallback(pacientesController.updateImagemPaciente));
+router.route('/dados-paciente-mobile').get(makeCallback(pacientesController.getPacienteMobile))
 
 export default router;
