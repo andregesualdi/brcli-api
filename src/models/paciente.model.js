@@ -51,8 +51,8 @@ class Paciente {
         return `UPDATE pacientes SET codigoAcesso = ${codigo} WHERE idPaciente = ${idPaciente} AND usuarios_id = ${idUsuario};`;
     }
 
-    static updateImagem(idPaciente, idUsuario, imagem) {
-        return `UPDATE pacientes SET imagem = '${imagem}' WHERE idPaciente = ${idPaciente} AND usuarios_id = ${idUsuario};`;
+    static updateImagem(idPaciente, imagem) {
+        return `UPDATE pacientes SET imagem = '${imagem}' WHERE idPaciente = ${idPaciente};`;
     }
 };
 

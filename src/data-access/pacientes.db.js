@@ -44,9 +44,9 @@ export default function makePacientesDb({Paciente, PacienteMobile, Codigo}) {
         return await db.query(query);
     }
 
-    async function cadastrarImagem(idPaciente, idUsuario, imagem) {
+    async function cadastrarImagem(idPaciente, imagem) {
         const db = mysql.createPool(Configuration.conn);
-        const query = Paciente.updateImagem(idPaciente, idUsuario, imagem);
+        const query = Paciente.updateImagem(idPaciente, imagem);
         return await db.query(query);
     }
 
