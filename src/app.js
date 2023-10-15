@@ -6,7 +6,7 @@ const app = express();
 configEnvironments();
 const port = Configuration.port;
 
-app.use(express.json());
+app.use(express.json({ limit: '3mb' }));
 app.use("/", routes);
 app.listen(port);
 console.log('Rodando na porta ' + port);

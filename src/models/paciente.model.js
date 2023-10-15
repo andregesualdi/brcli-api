@@ -39,6 +39,10 @@ class Paciente {
             WHERE p.usuarios_id = ${idUsuario} AND p.idPaciente = ${idPaciente};`;
     }
 
+    static selectDetalhesPacienteSemAgendamento(idPaciente, idUsuario) {
+        return `SELECT codigoAcesso, dataNascimento, altura, peso, nome, nomeAcesso, email, telefone, imagem, dataCadastro FROM pacientes WHERE usuarios_id = ${idUsuario} AND idPaciente = ${idPaciente};`;
+    }
+
     static insertPaciente(idUsuario, paciente, dataCadastro) {
         return `INSERT INTO pacientes (\`dataNascimento\`, \`altura\`, \`peso\`, \`nome\`, \`nomeAcesso\`, \`email\`, \`telefone\`, \`usuarios_id\`, \`dataCadastro\`) VALUES ('${paciente.dataNascimento}', ${paciente.altura}, ${paciente.peso}, '${paciente.nome}', '${paciente.nomeAcesso}', '${paciente.email}', ${paciente.telefone}, ${idUsuario}, '${dataCadastro}');`;
     }

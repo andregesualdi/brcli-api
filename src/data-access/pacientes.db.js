@@ -11,7 +11,20 @@ export default function makePacientesDb({Paciente, PacienteMobile, Codigo}) {
     async function detalharPaciente(idPaciente, idUsuario) {
         const db = mysql.createPool(Configuration.conn);
         const query = Paciente.selectDetalhesPaciente(idPaciente, idUsuario);
-        return await db.query(query);
+        const response = await db.query(query);
+        if (response[0][0]) {
+            return {
+                response: response[0][0],
+                agendado: true
+            };
+        } else {
+            const querySemAg = Paciente.selectDetalhesPacienteSemAgendamento(idPaciente, idUsuario);
+            const respSemAg = await db.query(querySemAg);
+            return {
+                response: respSemAg[0][0],
+                agendado: false
+            }
+        }
     }
 
     async function recuperarDadosPacienteNutricionista(idPaciente) {

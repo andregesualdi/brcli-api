@@ -4,7 +4,7 @@ export default function makePostMetas(db) {
         planoMetas.data = formatDate();
         if (planoMetas.id) {
             const response = await db.cadastrarPlanoMetas(headers['codigo-paciente'], planoMetas);
-            if (response[0] === 1 && response[1] === planoMetas.metas.length) {
+            if (response[0] === 1 && response[1]) {
                 return {
                     success: true
                 }
