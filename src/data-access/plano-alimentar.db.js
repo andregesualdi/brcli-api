@@ -31,13 +31,18 @@ export default function makePlanoAlimentarDb({Alimento, PlanoAlimentar, Refeicao
                 const response = await db.query(query);
                 let queryInsertAlimento = Alimento.insertAlimentoPrefix();
                 const queryDeleteAlimento = Alimento.deleteAlimento(refeicao.id);
-                refeicao.alimentos.forEach(al => {
-                    queryInsertAlimento = queryInsertAlimento.concat(Alimento.insertAlimentoSufix(al, refeicao.id));
-                });
-                queryInsertAlimento = queryInsertAlimento.substring(0, queryInsertAlimento.length - 2).concat(";");
-                const actualQuery = queryDeleteAlimento.concat(queryInsertAlimento);
-                const dbInsert = await db.query(actualQuery, [1, 2]);
-                responseRefeicoes.push(response[0].affectedRows > 0 && dbInsert[0][1].affectedRows > 0);
+                if (refeicao.alimentos.length > 0) {
+                    refeicao.alimentos.forEach(al => {
+                        queryInsertAlimento = queryInsertAlimento.concat(Alimento.insertAlimentoSufix(al, refeicao.id));
+                    });
+                    queryInsertAlimento = queryInsertAlimento.substring(0, queryInsertAlimento.length - 2).concat(";");
+                    const actualQuery = queryDeleteAlimento.concat(queryInsertAlimento);
+                    const dbInsert = await db.query(actualQuery, [1, 2]);
+                    responseRefeicoes.push(response[0].affectedRows > 0 && dbInsert[0][1].affectedRows > 0);
+                } else {
+                    const dbInsert = await db.query(queryDeleteAlimento);
+                    responseRefeicoes.push(response[0].affectedRows > 0 && dbInsert[0].serverStatus === 2);
+                }
             }
             return {
                 responsePlano,
