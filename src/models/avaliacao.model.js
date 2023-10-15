@@ -8,11 +8,11 @@ class Avaliacao {
     }
 
     static selectAvaliacao = function(idPaciente) {
-        return `SELECT arquivo, nomeArquivo FROM broccoli001.avaliacao WHERE pacientes_idPaciente = ${idPaciente};`
+        return `SELECT arquivo, nomeArquivo FROM avaliacao WHERE pacientes_idPaciente = ${idPaciente};`
     }
 
     static findAvaliacao = function(idPaciente) {
-        return `SELECT idAvaliacao FROM broccoli001.avaliacao WHERE pacientes_idPaciente = ${idPaciente};`
+        return `SELECT idAvaliacao FROM avaliacao WHERE pacientes_idPaciente = ${idPaciente};`
     }
 
     static updateAvaliacao = function(id, avaliacao) {
